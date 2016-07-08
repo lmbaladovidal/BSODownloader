@@ -12,13 +12,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Created by Usuario on 28/6/2016.
+ * Created by Teclita on 28/6/2016.
  */
 public class Main {
 
     public static String text;
 
-    public void setText(String text) {this.text = text;}
+    public static void setText(String t) {text = t;}
 
     public String getText() {return text;}
 
@@ -51,7 +51,7 @@ public class Main {
         }
     }
 
-    public static void call(){
+    public static void call(Juego juego){
         Document meta;
         Document doc;
         Document doc2;
@@ -63,7 +63,6 @@ public class Main {
         try {
             meta = Jsoup.connect(s).get();
             Elements links = meta.select("a[href]");
-            Juego juego = new Juego();
             juego.setTitle(s.substring(s.lastIndexOf("/")+1,s.length()));
             for (Element link : links) {
                 String b = link.toString();
@@ -99,11 +98,12 @@ public class Main {
                             song.setLink(e.substring(g , h));
                             song.setNombre(song.getLink().substring(song.getLink().lastIndexOf("/")+1,song.getLink().length()));
                             album.getListaSong().add(song);
+                            System.out.println(song.getNombre());
                             //escritura(song,album);
                         }
                     }
-                    descargar.setAcc(album.getListaSong().size());
-                    descargar.leer(album);
+                    //descargar.setAcc(album.getListaSong().size());
+                    //descargar.leer(album);
                 }
             }
 
